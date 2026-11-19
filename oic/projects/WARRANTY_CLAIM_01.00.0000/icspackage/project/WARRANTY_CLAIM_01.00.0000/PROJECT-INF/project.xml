@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:icsproject name="project_1" version="10.1" cversion="6" modelType="freeform" xmlns="http://www.oracle.com/2014/03/ics/project/definition" xmlns:ns2="http://www.oracle.com/2014/03/ics/flow/definition" xmlns:ns3="http://www.oracle.com/2014/03/ics/project">
+    <projectCode>WARRANTY_CLAIM</projectCode>
+    <projectVersion>01.00.0000</projectVersion>
+    <projectName>Warranty Claim</projectName>
+    <percentComplete>100</percentComplete>
+    <projectHasErrors>false</projectHasErrors>
+    <projectHasWarnings>false</projectHasWarnings>
+    <ns3:icsflow name="flow_1">
+        <ns2:application name="application_8">
+            <ns2:role>source</ns2:role>
+            <ns2:adapter>
+                <ns2:type>app-adapter</ns2:type>
+                <ns2:code>MY_REST_ENDPOINT_INTERFAC</ns2:code>
+                <ns2:name>helloWorld</ns2:name>
+                <ns2:property name="hasAttachment" value="false"/>
+            </ns2:adapter>
+            <ns2:mep>push-sync</ns2:mep>
+            <ns2:outbound name="outbound_9">
+                <ns2:binding>rest</ns2:binding>
+                <ns2:operation>execute</ns2:operation>
+                <ns2:resourceGroup name="resourcegroup_10">
+                    <ns2:resource name="resource_12" location="../resources/application_8/outbound_9/resourcegroup_10/helloWorld_REQUEST.wsdl" type="wsdl"/>
+                    <ns2:resource name="resource_1033" location="../resources/application_8/outbound_9/resourcegroup_10/helloWorld_REQUEST.jca" type="jca"/>
+                </ns2:resourceGroup>
+                <ns2:input name="input_14">
+                    <ns2:role>response</ns2:role>
+                    <ns2:messageContextRef refUri="messagecontext_13"/>
+                </ns2:input>
+                <ns2:input name="input_18">
+                    <ns2:role>fault</ns2:role>
+                    <ns2:subRole>APIInvocationError</ns2:subRole>
+                    <ns2:messageContextRef refUri="messagecontext_17"/>
+                </ns2:input>
+                <ns2:output name="output_16">
+                    <ns2:role>request</ns2:role>
+                    <ns2:messageContextRef refUri="messagecontext_15"/>
+                </ns2:output>
+            </ns2:outbound>
+        </ns2:application>
+        <ns2:processor name="processor_19">
+            <ns2:type>transformer</ns2:type>
+            <ns2:role>transformer:response-map</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_22">
+                <ns2:resource name="resource_23" location="../resources/processor_19/resourcegroup_22/req_4a43bcf9f7b549c1a1c44997ada99571.xsl" type="xslt"/>
+            </ns2:resourceGroup>
+            <ns2:input name="input_20">
+                <ns2:messageContextRef refUri="messagecontext_15"/>
+            </ns2:input>
+            <ns2:output name="output_21">
+                <ns2:messageContextRef refUri="messagecontext_13"/>
+            </ns2:output>
+            <ns2:property name="has-mappings" value="true"/>
+        </ns2:processor>
+        <ns2:processor name="processor_24">
+            <ns2:type>activityStreamLogger</ns2:type>
+            <ns2:role>undefined</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_1152">
+                <ns2:role>exprBuilderProperties</ns2:role>
+                <ns2:resource name="resource_1153" location="../resources/processor_24/resourcegroup_1152/expr.properties" type="properties"/>
+            </ns2:resourceGroup>
+            <ns2:resourceRef refUri="messagecontext_15">
+                <ns2:role>primary-source</ns2:role>
+            </ns2:resourceRef>
+            <ns2:property name="traceOnly" value="false"/>
+            <ns2:processorName>logIncoming</ns2:processorName>
+        </ns2:processor>
+        <ns2:processor name="processor_27">
+            <ns2:type>notification</ns2:type>
+            <ns2:role>undefined</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_1103">
+                <ns2:role>NotificationData</ns2:role>
+                <ns2:resource name="resource_1104" location="../resources/processor_27/resourcegroup_1103/notification_from.data" type="undefined"/>
+                <ns2:resource name="resource_1105" location="../resources/processor_27/resourcegroup_1103/notification_to.data" type="undefined"/>
+                <ns2:resource name="resource_1106" location="../resources/processor_27/resourcegroup_1103/notification_subject.data" type="undefined"/>
+                <ns2:resource name="resource_1107" location="../resources/processor_27/resourcegroup_1103/notification_body.data" type="undefined"/>
+            </ns2:resourceGroup>
+            <ns2:resourceGroup name="resourcegroup_1165">
+                <ns2:role>exprBuilderProperties</ns2:role>
+                <ns2:resource name="resource_1166" location="../resources/processor_27/resourcegroup_1165/SUBJECT_PARAM_1expr.properties" type="properties">
+                    <ns2:role>SUBJECT_PARAM_1</ns2:role>
+                </ns2:resource>
+                <ns2:resource name="resource_1167" location="../resources/processor_27/resourcegroup_1165/nameexpr.properties" type="properties">
+                    <ns2:role>name</ns2:role>
+                </ns2:resource>
+                <ns2:resource name="resource_1168" location="../resources/processor_27/resourcegroup_1165/FROM_PARAM_1expr.properties" type="properties">
+                    <ns2:role>FROM_PARAM_1</ns2:role>
+                </ns2:resource>
+                <ns2:resource name="resource_1169" location="../resources/processor_27/resourcegroup_1165/TO_PARAM_1expr.properties" type="properties">
+                    <ns2:role>TO_PARAM_1</ns2:role>
+                </ns2:resource>
+            </ns2:resourceGroup>
+            <ns2:resourceRef refUri="messagecontext_15">
+                <ns2:role>primary-source</ns2:role>
+            </ns2:resourceRef>
+            <ns2:processorName>sendEmail</ns2:processorName>
+        </ns2:processor>
+        <ns2:processor name="processor_47">
+            <ns2:type>contentBasedRouter</ns2:type>
+            <ns2:role>router:request-post-es</ns2:role>
+            <ns2:input name="input_48">
+                <ns2:messageContextRef refUri="messagecontext_15"/>
+            </ns2:input>
+            <ns2:output name="output_54">
+                <ns2:messageContextRef refUri="messagecontext_15"/>
+                <ns2:resourceGroup name="resourcegroup_1156">
+                    <ns2:resource name="resource_1157" location="../resources/processor_47/output_54/resourcegroup_1156/expr.properties" type="properties"/>
+                </ns2:resourceGroup>
+            </ns2:output>
+            <ns2:output name="output_64">
+                <ns2:messageContextRef refUri="messagecontext_15"/>
+                <ns2:resourceGroup name="resourcegroup_1158">
+                    <ns2:resource name="resource_1159" location="../resources/processor_47/output_64/resourcegroup_1158/expr.properties" type="properties"/>
+                </ns2:resourceGroup>
+            </ns2:output>
+        </ns2:processor>
+        <ns2:processor name="processor_163">
+            <ns2:type>activityStreamLogger</ns2:type>
+            <ns2:role>undefined</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_1154">
+                <ns2:role>exprBuilderProperties</ns2:role>
+                <ns2:resource name="resource_1155" location="../resources/processor_163/resourcegroup_1154/expr.properties" type="properties"/>
+            </ns2:resourceGroup>
+            <ns2:resourceRef refUri="messagecontext_15">
+                <ns2:role>primary-source</ns2:role>
+            </ns2:resourceRef>
+            <ns2:property name="traceOnly" value="false"/>
+            <ns2:processorName>logIncomingWithoutEmail</ns2:processorName>
+        </ns2:processor>
+        <ns2:processor name="processor_362">
+            <ns2:type>transformer</ns2:type>
+            <ns2:role>transformer:response-map</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_374">
+                <ns2:resource name="resource_375" location="../resources/processor_362/resourcegroup_374/req_a12093d4cd834eb6b693bca3db9144d5.xsl" type="xslt"/>
+            </ns2:resourceGroup>
+            <ns2:input name="input_363">
+                <ns2:messageContextRef refUri="messagecontext_15"/>
+            </ns2:input>
+            <ns2:output name="output_364">
+                <ns2:messageContextRef refUri="messagecontext_13"/>
+            </ns2:output>
+            <ns2:property name="has-mappings" value="true"/>
+        </ns2:processor>
+        <ns2:processor name="processor_476">
+            <ns2:type>assignment</ns2:type>
+            <ns2:role>undefined</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_1150">
+                <ns2:resource name="resource_1151" location="../resources/processor_476/resourcegroup_1150/expr.properties" type="properties"/>
+            </ns2:resourceGroup>
+            <ns2:resourceRef refUri="messagecontext_15">
+                <ns2:role>primary-source</ns2:role>
+            </ns2:resourceRef>
+            <ns2:output name="output_494">
+                <ns2:messageContextRef refUri="messagecontext_407"/>
+            </ns2:output>
+        </ns2:processor>
+        <ns2:processor name="processor_1049">
+            <ns2:type>messageTracker</ns2:type>
+            <ns2:role>messageTracker:global</ns2:role>
+            <ns2:trackingVariableGroup>
+                <ns2:trackingVariable>
+                    <ns2:role>tracking_var_1</ns2:role>
+                    <ns2:primary>true</ns2:primary>
+                    <ns2:name>name</ns2:name>
+                    <ns2:xpath>/execute/TemplateParameters/name</ns2:xpath>
+                    <ns2:messageContextRef refUri="messagecontext_15"/>
+                    <ns2:output name="output_1051">
+                        <ns2:messageContextRef refUri="messagecontext_1050"/>
+                    </ns2:output>
+                </ns2:trackingVariable>
+                <ns2:trackingVariable>
+                    <ns2:role>tracking_var_2</ns2:role>
+                    <ns2:primary>false</ns2:primary>
+                    <ns2:name>tracking_var_2</ns2:name>
+                    <ns2:messageContextRef refUri="messagecontext_15"/>
+                    <ns2:output name="output_1053">
+                        <ns2:messageContextRef refUri="messagecontext_1052"/>
+                    </ns2:output>
+                </ns2:trackingVariable>
+                <ns2:trackingVariable>
+                    <ns2:role>tracking_var_3</ns2:role>
+                    <ns2:primary>false</ns2:primary>
+                    <ns2:name>tracking_var_3</ns2:name>
+                    <ns2:messageContextRef refUri="messagecontext_15"/>
+                    <ns2:output name="output_1055">
+                        <ns2:messageContextRef refUri="messagecontext_1054"/>
+                    </ns2:output>
+                </ns2:trackingVariable>
+            </ns2:trackingVariableGroup>
+        </ns2:processor>
+        <ns2:processor name="processor_1170">
+            <ns2:type>integrationMetadata</ns2:type>
+            <ns2:role>undefined</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_1171">
+                <ns2:resource name="resource_1172" location="../resources/processor_1170/resourcegroup_1171/ICSIntegrationMetadata.xsd" type="xsd"/>
+            </ns2:resourceGroup>
+            <ns2:output name="output_1174">
+                <ns2:messageContextRef refUri="messagecontext_1173"/>
+            </ns2:output>
+        </ns2:processor>
+        <ns2:processor name="processor_1175">
+            <ns2:type>integrationProperties</ns2:type>
+            <ns2:role>undefined</ns2:role>
+            <ns2:resourceGroup name="resourcegroup_1176">
+                <ns2:resource name="resource_1177" location="../resources/processor_1175/resourcegroup_1176/ICSIntegrationProperties.xsd" type="xsd"/>
+            </ns2:resourceGroup>
+            <ns2:resourceGroup name="resourcegroup_1180">
+                <ns2:role>exprBuilderProperties</ns2:role>
+                <ns2:resource name="resource_1181" location="../resources/processor_1175/resourcegroup_1180/property_3expr.properties" type="properties">
+                    <ns2:role>property_3</ns2:role>
+                </ns2:resource>
+                <ns2:resource name="resource_1182" location="../resources/processor_1175/resourcegroup_1180/property_2expr.properties" type="properties">
+                    <ns2:role>property_2</ns2:role>
+                </ns2:resource>
+                <ns2:resource name="resource_1183" location="../resources/processor_1175/resourcegroup_1180/property_1expr.properties" type="properties">
+                    <ns2:role>property_1</ns2:role>
+                </ns2:resource>
+            </ns2:resourceGroup>
+            <ns2:output name="output_1179">
+                <ns2:messageContextRef refUri="messagecontext_1178"/>
+            </ns2:output>
+        </ns2:processor>
+        <ns2:messageContext name="messagecontext_2">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_4">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_6">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_13">
+            <ns2:resourceRef refUri="application_8/outbound_9/resourcegroup_10/resource_12"/>
+            <ns2:rootElement elementName="executeResponse" namespace="http://xmlns.oracle.com/cloud/adapter/REST/helloWorld_REQUEST/types"/>
+            <ns2:wsdlMessage messageName="executeResponseMessage" namespace="http://xmlns.oracle.com/cloud/adapter/REST/helloWorld_REQUEST" partName="parameters"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_15">
+            <ns2:resourceRef refUri="application_8/outbound_9/resourcegroup_10/resource_12"/>
+            <ns2:rootElement elementName="execute" namespace="http://xmlns.oracle.com/cloud/adapter/REST/helloWorld_REQUEST/types"/>
+            <ns2:wsdlMessage messageName="executeRequestMessage" namespace="http://xmlns.oracle.com/cloud/adapter/REST/helloWorld_REQUEST" partName="parameters"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_17">
+            <ns2:resourceRef refUri="application_8/outbound_9/resourcegroup_10/resource_12"/>
+            <ns2:rootElement elementName="APIInvocationError" namespace="http://xmlns.oracle.com/cloud/generic/rest/fault/REST/helloWorld"/>
+            <ns2:wsdlMessage messageName="APIInvocationError" namespace="http://xmlns.oracle.com/cloud/adapter/REST/helloWorld_REQUEST" partName="parameters"/>
+            <ns2:wsdlFault faultName="APIInvocationError" namespace="http://xmlns.oracle.com/cloud/adapter/REST/helloWorld_REQUEST"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_281">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_283">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_285">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_405">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_407">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_409">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_1050">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_1052">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_1054">
+            <ns2:rootElement elementName="string" namespace="http://www.w3.org/2001/XMLSchema"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_1173">
+            <ns2:resourceRef refUri="processor_1170/resourcegroup_1171/resource_1172"/>
+            <ns2:rootElement elementName="metadata" namespace="http://www.oracle.com/2014/03/ic/integration/metadata"/>
+        </ns2:messageContext>
+        <ns2:messageContext name="messagecontext_1178">
+            <ns2:resourceRef refUri="processor_1175/resourcegroup_1176/resource_1177"/>
+            <ns2:rootElement elementName="properties" namespace="http://www.oracle.com/2014/03/ic/integration/properties"/>
+        </ns2:messageContext>
+        <ns2:commonNamespaceMaps/>
+        <ns2:orchestration>
+            <ns2:integrationMetadata id="im0" refUri="processor_1170"/>
+            <ns2:integrationProperties id="ip0" refUri="processor_1175"/>
+            <ns2:receive trackingRefUri="processor_1049" id="r0" refUri="application_8/outbound_9/output_16"/>
+            <ns2:router id="s0" refUri="processor_47">
+                <ns2:route id="sc0" refUri="processor_47/output_54">
+                    <ns2:activityStreamLogger id="lg0" refUri="processor_24"/>
+                    <ns2:label id="l0" name="assignSecondaryTracking" description="assign value to tracking variable 2.">
+                        <ns2:assignment id="a0" refUri="processor_476"/>
+                    </ns2:label>
+                    <ns2:notification id="n0" refUri="processor_27"/>
+                    <ns2:transformer id="m0" refUri="processor_19"/>
+                </ns2:route>
+                <ns2:route id="sc1" refUri="processor_47/output_64">
+                    <ns2:activityStreamLogger id="lg1" refUri="processor_163"/>
+                    <ns2:transformer id="m1" refUri="processor_362"/>
+                </ns2:route>
+            </ns2:router>
+            <ns2:reply id="y0" refUri="application_8/outbound_9/input_14"/>
+        </ns2:orchestration>
+    </ns3:icsflow>
+</ns3:icsproject>
