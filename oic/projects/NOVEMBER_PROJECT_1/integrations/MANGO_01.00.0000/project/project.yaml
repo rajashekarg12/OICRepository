@@ -6,43 +6,57 @@ description: 'only for Testing Project Robots '
 mcpEnabled: false
 type: DEVELOPED
 smartTags:
-- "app:rest,style:app driven orchestration"
+- "app:rest, app:appevent,style:app driven orchestration"
 revision: 0
-projectRevision: 98
+projectRevision: 133
 status: CONFIGURED
 createdBy: rajashekar.gaddi@flexagon.com
 createdDate: 2026-11-06T14:51:45.476+0000
 updatedBy: rajashekar.gaddi@flexagon.com
 updatedDate: 2026-11-06T14:51:45.476+0000
 latestBy: rajashekar.gaddi@flexagon.com
-latestDate: 2026-11-19T11:36:07.533+0000
+latestDate: 2026-11-20T12:53:28.351+0000
 CAV: 1
 simplifiedMode: false
 assets:
   integrations:
   - id: MANGO|01.00.0000
     name: Mango
-    revision: 2
+    revision: 5
     updatedBy: rajashekar.gaddi@flexagon.com
-    updatedDate: 2026-11-11T14:49:32.523+0000
+    updatedDate: 2026-11-20T12:44:29.544+0000
   connections:
   - id: ALLCONNECTION2
     name: AllConnection2
-    revision: 0
+    revision: 4
     updatedBy: rajashekar.gaddi@flexagon.com
-    updatedDate: 2026-11-06T14:51:45.051+0000
+    updatedDate: 2026-11-20T11:42:51.908+0000
+  - id: APPLICATION_EVENT_CONNECTION
+    name: APPLICATION_EVENT_CONNECTION
+    revision: 0
+    updatedBy: Jay-Ar.Brouillard@flexagon.com
+    updatedDate: 2023-05-17T17:12:37.529+0000
   lookups:
   - id: Mangolookup
     name: Mangolookup
     revision: 0
     updatedBy: rajashekar.gaddi@flexagon.com
     updatedDate: 2026-11-06T14:51:45.476+0000
-  labels:
-  - id: FD_1.0.27_1795088166185
-    name: FD_1.0.27_1795088166185
+  eventtypes:
+  - id: MYTESTEVENT|1
+    name: mytestEvent
+  libraries:
+  - id: CONVERTTOOLARRAYFROMOPENAITOGENN|01.00.0000
+    name: convertToolArrayFromOpenAItoGenNew
     revision: 0
     updatedBy: rajashekar.gaddi@flexagon.com
-    updatedDate: 2026-11-19T11:36:07.533+0000
+    updatedDate: 2026-11-06T14:51:45.476+0000
+  labels:
+  - id: FD_1.0.28_1795179207124
+    name: FD_1.0.28_1795179207124
+    revision: 0
+    updatedBy: rajashekar.gaddi@flexagon.com
+    updatedDate: 2026-11-20T12:53:28.351+0000
 origin:
   tenantOCID: ocid1.tenancy.oc1..aaaaaaaahpnjx74d6mrng7xemyfnbfaxdzhlgdpoxfxmrwivslyktofveiwq
   serviceInstanceOCID: ocid1.integrationinstance.oc1.iad.amaaaaaavtuicmqa22bei2i6w2uovbbnwoksgxuhuwhjifpl6xinh3hqwmnq
