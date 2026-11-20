@@ -6,25 +6,25 @@ description: 'only for Testing Project Robots '
 mcpEnabled: false
 type: DEVELOPED
 smartTags:
-- "app:rest, app:appevent,style:app driven orchestration"
+- "app:rest, app:appevent, app:rpa, app:oracle:opa-decision,style:app driven orchestration"
 revision: 0
-projectRevision: 133
+projectRevision: 149
 status: CONFIGURED
 createdBy: rajashekar.gaddi@flexagon.com
 createdDate: 2026-11-06T14:51:45.476+0000
 updatedBy: rajashekar.gaddi@flexagon.com
 updatedDate: 2026-11-06T14:51:45.476+0000
 latestBy: rajashekar.gaddi@flexagon.com
-latestDate: 2026-11-20T12:53:28.351+0000
+latestDate: 2026-11-20T13:36:35.116+0000
 CAV: 1
 simplifiedMode: false
 assets:
   integrations:
   - id: MANGO|01.00.0000
     name: Mango
-    revision: 5
+    revision: 11
     updatedBy: rajashekar.gaddi@flexagon.com
-    updatedDate: 2026-11-20T12:44:29.544+0000
+    updatedDate: 2026-11-20T13:35:58.624+0000
   connections:
   - id: ALLCONNECTION2
     name: AllConnection2
@@ -36,6 +36,16 @@ assets:
     revision: 0
     updatedBy: Jay-Ar.Brouillard@flexagon.com
     updatedDate: 2023-05-17T17:12:37.529+0000
+  - id: DECISION_SERVICE_NATIVE_CONN
+    name: DECISION_SERVICE_NATIVE_CONN
+    revision: 0
+    updatedBy: erick.jones@flexagon.com
+    updatedDate: 2025-07-28T12:24:27.846+0000
+  - id: PRESEEDED_OIC_RPA_CONN_1741
+    name: OIC_RPA_CONNECTION
+    revision: 0
+    updatedBy: erick.jones@flexagon.com
+    updatedDate: 2024-02-29T17:24:13.655+0000
   lookups:
   - id: Mangolookup
     name: Mangolookup
@@ -52,11 +62,11 @@ assets:
     updatedBy: rajashekar.gaddi@flexagon.com
     updatedDate: 2026-11-06T14:51:45.476+0000
   labels:
-  - id: FD_1.0.28_1795179207124
-    name: FD_1.0.28_1795179207124
+  - id: FD_1.0.29_1795181794250
+    name: FD_1.0.29_1795181794250
     revision: 0
     updatedBy: rajashekar.gaddi@flexagon.com
-    updatedDate: 2026-11-20T12:53:28.351+0000
+    updatedDate: 2026-11-20T13:36:35.116+0000
 origin:
   tenantOCID: ocid1.tenancy.oc1..aaaaaaaahpnjx74d6mrng7xemyfnbfaxdzhlgdpoxfxmrwivslyktofveiwq
   serviceInstanceOCID: ocid1.integrationinstance.oc1.iad.amaaaaaavtuicmqa22bei2i6w2uovbbnwoksgxuhuwhjifpl6xinh3hqwmnq
